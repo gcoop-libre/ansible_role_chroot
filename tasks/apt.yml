@@ -1,16 +1,28 @@
 ---
 
+- name: check for {{ chroot_arch }} architecture
+  command: dpkg --print-foreign-architectures
+  become: yes
+  changed_when: False
+  register: dpkg_architectures
+
 - name: add {{ chroot_arch }} architecture
   command: dpkg --add-architecture {{ chroot_arch }}
   become: yes
+  when: chroot_arch not in dpkg_architectures.stdout_lines
   changed_when: False
+
+- name: Estimate time of last apt update
+  stat:
+    path: '/var/cache/apt'
+  register: _apt_cache
 
 - name: Update APT
   apt:
     update_cache: yes
     cache_valid_time: 3600
-  changed_when: False
   become: yes
+  when: _apt_cache.stat.mtime > 3600
 
 - name: Install chroot packages
   apt:
