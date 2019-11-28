@@ -1,0 +1,3 @@
+# {{ ansible_managed }}
+Acquire::http::Proxy  "http://{{ chroot_apt_proxy_host }}:{{ chroot_apt_proxy_port }}";
+Acquire::https::Proxy "http://{{ chroot_apt_proxy_host }}:{{ chroot_apt_proxy_port }}";
