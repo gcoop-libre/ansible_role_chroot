@@ -73,6 +73,35 @@
   become: yes
   when: not debootstrap_stat.stat.exists
 
+- name: set apt proxy config in chroot
+  template:
+    src: templates/02proxy.j2
+    dest: "{{ chroot_dir }}/etc/apt/apt.conf.d/02proxy"
+    owner: root
+    group: root
+    mode: '0644'
+  when: chroot_apt_proxy
+  become: yes
+
+- name: configure /etc/apt/sources.list in chroot
+  template:
+    src: templates/sources.list.j2
+    dest: "{{ chroot_dir }}/etc/apt/sources.list"
+    owner: root
+    group: root
+    mode: '0644'
+  when: chroot_apt_sources_proxy
+  become: yes
+
+- name: update apt packages in chroot
+  command: >
+    schroot
+    -c {{ chroot_name }}
+    -u root
+    -- apt-get update
+  when: chroot_apt_packages | length > 0
+  become: yes
+
 - name: install packages in chroot
   command: >
     schroot

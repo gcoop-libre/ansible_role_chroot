@@ -13,7 +13,16 @@ chroot_fstab_mounts: []
 # - '/apps'
 
 chroot_apt_packages: []
-# - vim
+# - apt-utils
+
+chroot_apt_proxy: False
+chroot_apt_proxy_host: "{{ ansible_facts.default_ipv4.gateway }}"
+chroot_apt_proxy_port: 3128
+
+chroot_apt_sources_proxy: False
+chroot_apt_sources_proxy_host: "{{ ansible_facts.default_ipv4.gateway }}"
+chroot_apt_sources_proxy_port: 3142
+chroot_apt_sources_mirror: archive.ubuntu.com
 
 chroot_name: "{{ chroot_os }}-{{ chroot_version }}-{{ chroot_arch }}"
 chroot_description: "{{ chroot_name | replace('-',' ') }}"
