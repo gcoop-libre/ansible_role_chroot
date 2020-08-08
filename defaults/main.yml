@@ -24,6 +24,9 @@ chroot_apt_sources_proxy_host: "{{ ansible_facts.default_ipv4.gateway }}"
 chroot_apt_sources_proxy_port: 3142
 chroot_apt_sources_mirror: archive.ubuntu.com
 
+chroot_apt_repositories:
+  - "deb http://{{ chroot_apt_sources_proxy_host }}:{{ chroot_apt_sources_proxy_port }}/{{ chroot_apt_sources_mirror }}/{{ chroot_os }} {{ chroot_version }} main contrib"
+
 chroot_name: "{{ chroot_os }}-{{ chroot_version }}-{{ chroot_arch }}"
 chroot_description: "{{ chroot_name | replace('-',' ') }}"
 chroot_dir:  "{{ chroot_base_dir }}/{{ chroot_name }}"
