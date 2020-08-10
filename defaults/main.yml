@@ -16,6 +16,7 @@ chroot_apt_packages: []
 # - apt-utils
 
 chroot_apt_proxy: False
+chroot_apt_noproxy: False
 chroot_apt_proxy_host: "{{ ansible_facts.default_ipv4.gateway }}"
 chroot_apt_proxy_port: 3128
 
