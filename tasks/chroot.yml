@@ -80,7 +80,14 @@
     owner: root
     group: root
     mode: '0644'
-  when: chroot_apt_proxy
+  when: chroot_apt_proxy | bool
+  become: yes
+
+- name: Remove apt proxy config in chroot
+  file:
+    path: "{{ chroot_dir }}/etc/apt/apt.conf.d/02proxy"
+    state: absent
+  when: chroot_apt_noproxy | bool
   become: yes
 
 - name: configure /etc/apt/sources.list in chroot
