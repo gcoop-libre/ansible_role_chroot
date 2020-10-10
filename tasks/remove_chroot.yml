@@ -1,5 +1,8 @@
 ---
 
+- name: schroot
+  command: schroot -e -f -c {{ chroot_name }}
+
 - name: stop schroot
   service:
     name: schroot
