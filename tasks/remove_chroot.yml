@@ -1,0 +1,16 @@
+---
+
+- name: stop schroot
+  service:
+    name: schroot
+    state: stopped
+  become: yes
+
+- name: Remove directory {{ chroot_dir }}
+  file:
+    path: "{{ chroot_dir }}"
+    state: absent
+  become: yes
+
+
+
