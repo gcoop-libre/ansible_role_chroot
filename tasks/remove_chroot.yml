@@ -1,7 +1,7 @@
 ---
 
 - name: schroot
-  command: schroot -e -f -c {{ chroot_name }}
+  command: schroot --end-session --force --all-sessions
 
 - name: stop schroot
   service:
