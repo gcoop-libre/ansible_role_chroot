@@ -1,3 +1,4 @@
 *.retry
+tests/inventory
 tests/plugins
 tests/roles
