@@ -109,6 +109,15 @@
   when: chroot_apt_packages | length > 0
   become: yes
 
+- name: upgrade apt packages in chroot
+  command: >
+    schroot
+    -c {{ chroot_name }}
+    -u root
+    -- apt-get -y upgrade
+  when: chroot_apt_upgrade | bool
+  become: yes
+
 - name: install packages in chroot
   command: >
     schroot
