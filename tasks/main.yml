@@ -1,4 +1,9 @@
 ---
 
 - include_tasks: apt.yml
+
 - include_tasks: chroot.yml
+  when: not chroot_remove
+
+- include_tasks: remove_chroot.yml
+  when: chroot_remove | bool

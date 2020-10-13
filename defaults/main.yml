@@ -9,6 +9,8 @@ chroot_users: xenial
 chroot_version: xenial
 chroot_debootstrap_mirror: http://archive.ubuntu.com/ubuntu
 
+chroot_remove: False
+
 chroot_fstab_mounts: []
 # - '/apps'
 
